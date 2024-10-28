@@ -47,11 +47,13 @@ public class TeleportationSphereController : MonoBehaviour
             {
                 RenderSettings.skybox = material1;
                 mat1Elements.SetActive(true);
+                lobbyElements.SetActive(false);
             }
             else if (RenderSettings.skybox == material1)
             {
                 RenderSettings.skybox = material2;
                 mat2Elements.SetActive(true);
+                lobbyElements.SetActive(false);
             }
             else if (RenderSettings.skybox == material2)
             {
@@ -79,6 +81,7 @@ public class TeleportationSphereController : MonoBehaviour
                 RenderSettings.skybox = material1;
                 mat2Elements.SetActive(false);
                 mat1Elements.SetActive(true);
+                lobbyElements.SetActive(false);
             }
         }
     }
