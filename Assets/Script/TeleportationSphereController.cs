@@ -1,88 +1,120 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
-public class TeleportationSphereController : MonoBehaviour
+namespace SphereController
 {
-    [SerializeField] Material material1;
-    [SerializeField] Material material2;
-    [SerializeField] Material material3;
-    [SerializeField] GameObject lobbyElements;
-    [SerializeField] GameObject mat1Elements;
-    [SerializeField] GameObject mat2Elements;
-
-    public void OnTeleport(int mat)
+    public class TeleportationSphereController : MonoBehaviour
     {
-        Debug.Log("Teleporting");
+        [SerializeField] Material material1;
+        [SerializeField] Material material2;
+        [SerializeField] Material material3;
+        [SerializeField] Material materialVideo1;
+        [SerializeField] GameObject lobbyElements;
+        [SerializeField] VideoPlayer videoPlayer;
+        [SerializeField] VideoClip videoClip1;
+        [SerializeField] VideoClip videoClip2;
+        //[SerializeField] GameObject mat1Elements;
+        //[SerializeField] GameObject mat2Elements;
 
-        if (lobbyElements.activeSelf == true)
+        public void OnTeleport(int mat)
         {
-            lobbyElements.SetActive(false);
+            Debug.Log("sqwdfsqdfsqd");
+            switch (mat)
+            {
+                case 1:
+                    RenderSettings.skybox = material1;
+                    /*mat1Elements.SetActive(true);*/
+                    //lobbyElements.SetActive(false);
+                    break;
+                case 2:
+                    RenderSettings.skybox = material2;
+                    /*mat1Elements.SetActive(false);
+                    mat2Elements.SetActive(true);*/
+                    lobbyElements.SetActive(false);
+                    break;
+                case 3:
+                    RenderSettings.skybox = material3;
+                    /*mat1Elements.SetActive(false);
+                    mat2Elements.SetActive(false);*/
+                    lobbyElements.SetActive(true);
+                    break;
+                case 4:
+                    videoPlayer.Stop();
+                    videoPlayer.clip = null;
+                    RenderSettings.skybox = materialVideo1;
+                    /*mat1Elements.SetActive(false);
+                    mat2Elements.SetActive(false);*/
+                    lobbyElements.SetActive(false);
+                    videoPlayer.clip = videoClip1;
+                    videoPlayer.Play();
+                    break;
+                case 5:
+                    videoPlayer.Stop();
+                    videoPlayer.clip = null;
+                    RenderSettings.skybox = materialVideo1;
+                    /*mat1Elements.SetActive(false);
+                    mat2Elements.SetActive(false);*/
+                    lobbyElements.SetActive(false);
+                    videoPlayer.clip = videoClip2;
+                    videoPlayer.Play();
+                    break;
+            }
         }
 
-        if (mat == 1)
+        public void OnButtonClick(string type)
         {
-            RenderSettings.skybox = material2;
-            mat2Elements.SetActive(true);
-        }
-        else if (mat == 0)
-        {
-            RenderSettings.skybox = material1;
-            mat1Elements.SetActive(true);
-        }
-        else
-        {
-            RenderSettings.skybox = material3;
-            mat1Elements.SetActive(false);
-            mat2Elements.SetActive(false);
-            lobbyElements.SetActive(true);
-        }
-    }
+            if (type == "Forward")
+            {
+                if (RenderSettings.skybox == material3)
+                {
+                    RenderSettings.skybox = material1;
+                    //mat1Elements.SetActive(true);
+                    lobbyElements.SetActive(false);
+                }
+                else if (RenderSettings.skybox == material1)
+                {
+                    RenderSettings.skybox = material2;
+                    /*mat1Elements.SetActive(false);
+                    mat2Elements.SetActive(true);*/
+                    lobbyElements.SetActive(false);
+                }
+                else if (RenderSettings.skybox == material2)
+                {
+                    RenderSettings.skybox = material3;
+                    /*mat1Elements.SetActive(false);
+                    mat2Elements.SetActive(false);*/
+                    lobbyElements.SetActive(true);
+                }
+            }
+            else
+            {
+                if (RenderSettings.skybox == material3)
+                {
 
-    public void OnButtonClick(string type)
-    {
-        if (type == "Forward")
-        {
-            if (RenderSettings.skybox == material3)
-            {
-                RenderSettings.skybox = material1;
-                mat1Elements.SetActive(true);
-                lobbyElements.SetActive(false);
-            }
-            else if (RenderSettings.skybox == material1)
-            {
-                RenderSettings.skybox = material2;
-                mat2Elements.SetActive(true);
-                lobbyElements.SetActive(false);
-            }
-            else if (RenderSettings.skybox == material2)
-            {
-                RenderSettings.skybox = material3;
-                mat1Elements.SetActive(false);
-                mat2Elements.SetActive(false);
-                lobbyElements.SetActive(true);
+                }
+                else if (RenderSettings.skybox == material1)
+                {
+                    RenderSettings.skybox = material3;
+                    /*mat1Elements.SetActive(false);
+                    mat2Elements.SetActive(false);*/
+                    lobbyElements.SetActive(true);
+                }
+                else if (RenderSettings.skybox == material2)
+                {
+                    RenderSettings.skybox = material1;
+                    /*mat2Elements.SetActive(false);
+                    mat1Elements.SetActive(true);*/
+                    lobbyElements.SetActive(false);
+                }
             }
         }
-        else
+
+        public void OnHover()
         {
-            if (RenderSettings.skybox == material3)
-            {
-                
-            }
-            else if (RenderSettings.skybox == material1)
-            {
-                RenderSettings.skybox = material3;
-                mat1Elements.SetActive(false);
-                mat2Elements.SetActive(false);
-                lobbyElements.SetActive(true);
-            }
-            else if (RenderSettings.skybox == material2)
-            {
-                RenderSettings.skybox = material1;
-                mat2Elements.SetActive(false);
-                mat1Elements.SetActive(true);
-                lobbyElements.SetActive(false);
-            }
+            Debug.Log("Hover");
         }
     }
 }
+
