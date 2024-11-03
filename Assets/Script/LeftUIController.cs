@@ -78,8 +78,8 @@ namespace LeftHandUIController
             {
                 case 1:
                     RenderSettings.skybox = material1;
-                    /*mat1Elements.SetActive(true);
-                    lobbyElements.SetActive(false);*/
+                    /*mat1Elements.SetActive(true);*/
+                    lobbyElements.SetActive(false);
                     break;
                 case 2:
                     RenderSettings.skybox = material2;

@@ -15,37 +15,27 @@ namespace SphereController
         [SerializeField] VideoPlayer videoPlayer;
         [SerializeField] VideoClip videoClip1;
         [SerializeField] VideoClip videoClip2;
-        //[SerializeField] GameObject mat1Elements;
-        //[SerializeField] GameObject mat2Elements;
 
         public void OnTeleport(int mat)
         {
-            Debug.Log("sqwdfsqdfsqd");
             switch (mat)
             {
                 case 1:
                     RenderSettings.skybox = material1;
-                    /*mat1Elements.SetActive(true);*/
-                    //lobbyElements.SetActive(false);
+                    lobbyElements.SetActive(false);
                     break;
                 case 2:
                     RenderSettings.skybox = material2;
-                    /*mat1Elements.SetActive(false);
-                    mat2Elements.SetActive(true);*/
                     lobbyElements.SetActive(false);
                     break;
                 case 3:
                     RenderSettings.skybox = material3;
-                    /*mat1Elements.SetActive(false);
-                    mat2Elements.SetActive(false);*/
                     lobbyElements.SetActive(true);
                     break;
                 case 4:
                     videoPlayer.Stop();
                     videoPlayer.clip = null;
                     RenderSettings.skybox = materialVideo1;
-                    /*mat1Elements.SetActive(false);
-                    mat2Elements.SetActive(false);*/
                     lobbyElements.SetActive(false);
                     videoPlayer.clip = videoClip1;
                     videoPlayer.Play();
@@ -54,8 +44,6 @@ namespace SphereController
                     videoPlayer.Stop();
                     videoPlayer.clip = null;
                     RenderSettings.skybox = materialVideo1;
-                    /*mat1Elements.SetActive(false);
-                    mat2Elements.SetActive(false);*/
                     lobbyElements.SetActive(false);
                     videoPlayer.clip = videoClip2;
                     videoPlayer.Play();
@@ -70,21 +58,34 @@ namespace SphereController
                 if (RenderSettings.skybox == material3)
                 {
                     RenderSettings.skybox = material1;
-                    //mat1Elements.SetActive(true);
                     lobbyElements.SetActive(false);
                 }
                 else if (RenderSettings.skybox == material1)
                 {
                     RenderSettings.skybox = material2;
-                    /*mat1Elements.SetActive(false);
-                    mat2Elements.SetActive(true);*/
                     lobbyElements.SetActive(false);
                 }
                 else if (RenderSettings.skybox == material2)
                 {
+                    videoPlayer.Stop();
+                    videoPlayer.clip = null;
+                    RenderSettings.skybox = materialVideo1;
+                    lobbyElements.SetActive(false);
+                    videoPlayer.clip = videoClip1;
+                    videoPlayer.Play();
+                }
+                else if (RenderSettings.skybox == materialVideo1 && videoPlayer.clip  == videoClip1)
+                {
+                    videoPlayer.Stop();
+                    videoPlayer.clip = null;
+                    RenderSettings.skybox = materialVideo1;
+                    lobbyElements.SetActive(false);
+                    videoPlayer.clip = videoClip2;
+                    videoPlayer.Play();
+                }
+                else if (videoPlayer.clip  == videoClip2)
+                {
                     RenderSettings.skybox = material3;
-                    /*mat1Elements.SetActive(false);
-                    mat2Elements.SetActive(false);*/
                     lobbyElements.SetActive(true);
                 }
             }
@@ -97,16 +98,26 @@ namespace SphereController
                 else if (RenderSettings.skybox == material1)
                 {
                     RenderSettings.skybox = material3;
-                    /*mat1Elements.SetActive(false);
-                    mat2Elements.SetActive(false);*/
                     lobbyElements.SetActive(true);
                 }
                 else if (RenderSettings.skybox == material2)
                 {
                     RenderSettings.skybox = material1;
-                    /*mat2Elements.SetActive(false);
-                    mat1Elements.SetActive(true);*/
                     lobbyElements.SetActive(false);
+                }
+                else if (RenderSettings.skybox == materialVideo1 && videoPlayer.clip  == videoClip1)
+                {
+                    RenderSettings.skybox = material2;
+                    lobbyElements.SetActive(false);
+                }
+                else if (RenderSettings.skybox == materialVideo1 && videoPlayer.clip  == videoClip2)
+                {
+                    videoPlayer.Stop();
+                    videoPlayer.clip = null;
+                    RenderSettings.skybox = materialVideo1;
+                    lobbyElements.SetActive(false);
+                    videoPlayer.clip = videoClip1;
+                    videoPlayer.Play();
                 }
             }
         }

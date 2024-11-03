@@ -7,7 +7,7 @@ using TMPro;
 public class PerformanceDebbugController : MonoBehaviour
 {
     int avgFrameRate;
-    [SerializeField] Canvas canvas;
+    [SerializeField] GameObject debugInfo;
     [SerializeField] TextMeshProUGUI fpsText;
     [SerializeField] TextMeshProUGUI trianglesText;
     [SerializeField] TextMeshProUGUI verticesText;
@@ -51,13 +51,13 @@ public class PerformanceDebbugController : MonoBehaviour
 
     public void OnButtonClick()
     {
-        if (canvas.gameObject.activeSelf == false)
+        if (debugInfo.activeSelf == false)
         {
-            canvas.gameObject.SetActive(true);
+            debugInfo.SetActive(true);
         }
         else
         {
-            canvas.gameObject.SetActive(false);
+            debugInfo.SetActive(false);
         }
     }
 }
